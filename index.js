@@ -48,9 +48,9 @@ function subMatrix (data, numRows, numCols, row, col) {
  *
  * @param {Array} data, lenght must be a square.
  * @param {Object} [scalar]
- * @param {Function} [scalar.addition = ]
- * @param {Function} [scalar.multiplication = ]
- * @param {Function} [scalar.negation = ]
+ * @param {Function} [scalar.addition       = (a, b) -> a + b ]
+ * @param {Function} [scalar.multiplication = (a, b) -> a * b ]
+ * @param {Function} [scalar.negation       = (a)    -> -a    ]
  * @param {Number} [order], defaults to Math.sqrt(data.length)
  *
  * @returns {*} det
@@ -62,19 +62,22 @@ function determinant (data, scalar, order) {
   if (data.length === 1)
     return data[0]
 
-  if (typeof scalar === 'undefined')
-    scalar = {}
-
   if (typeof order === 'undefined')
     order = Math.sqrt(data.length)
 
   if (order % 1 !== 0)
     throw new TypeError('data.lenght must be a square')
 
-  var det,
-      add = scalar.addition,
-      mul = scalar.multiplication,
-      neg = scalar.negation
+  // Default to common real number field.
+  if (typeof scalar === 'undefined') {
+    scalar = {
+      addition      : function (a, b) { return a + b },
+      multiplication: function (a, b) { return a * b },
+      negation      : function (a) { return -a }
+    }
+  }
+
+  var det
 
   // TODO choose best row or column to start from, i.e. the one with more zeros
   // by now we start from first row, and walk by column
@@ -89,17 +92,17 @@ function determinant (data, scalar, order) {
 
                 // +-- Recursion here.
                 // ↓
-    var cofactor = determinant(scalar, subData, order - 1)
+    var cofactor = determinant(subData, scalar, order - 1)
 
     if ((startingRow + col) % 2 === 1)
-      cofactor = neg(cofactor)
+      cofactor = scalar.negation(cofactor)
 
     var index = matrixToArrayIndex(startingRow, col, order)
 
     if (typeof det === 'undefined')
-      det = mul(data[index], cofactor) // first iteration
+      det = scalar.multiplication(data[index], cofactor) // first iteration
     else
-      det = add(det, mul(data[index], cofactor))
+      det = scalar.addition(det, scalar.multiplication(data[index], cofactor))
   }
 
   return det
