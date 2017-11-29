@@ -13,7 +13,7 @@ All code in the examples below is intended to be contained into a [single file](
 
 Basic usage is to compute determinant of matrices of common numbers.
 
-```
+```javascript
 var det = require('laplace-determinant')
 
 // order = 1
@@ -51,7 +51,7 @@ Just [contact me](http://g14n.info) and I will happy to get this kind of useful 
 
 Optional *scalar* object defaults to common Real field, i.e.
 
-```
+```javascript
 scalar = {
   addition      : function (a, b) { return a + b },
   multiplication: function (a, b) { return a * b },
@@ -61,7 +61,7 @@ scalar = {
 
 It is possible to compute determinant over any field. Consider for example the [Boolean algebra](http://en.wikipedia.org/wiki/Boolean_algebra).
 
-```
+```javascript
 var boole = {
   addition      : function (a, b) { return a && b },
   multiplication: function (a, b) { return a || b },
