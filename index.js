@@ -67,9 +67,9 @@ function determinant (data, scalar, order) {
 
   if (no(order)) order = Math.sqrt(data.length)
 
-    if (order % 1 !== 0) {
-      throw new TypeError('data.lenght must be a square')
-    }
+  if (order % 1 !== 0) {
+    throw new TypeError('data.lenght must be a square')
+  }
 
   // Default to common real number field.
   if (no(scalar)) {
