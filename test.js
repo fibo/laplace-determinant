@@ -1,6 +1,7 @@
+/* eslint-disable indent */
 
-var det = require('./index'),
-    test = require('tape')
+var det = require('./index')
+var test = require('tape')
 
 test('Basic usage', function (t) {
   t.plan(6)
@@ -23,9 +24,9 @@ test('Basic usage', function (t) {
                0, 1, 0,
                0, 0, 1]), 1)
 
-  t.equal(det([0,  1, 0,
+  t.equal(det([0, 1, 0,
                2, -1, 0,
-               0,  2, 1]), -2)
+               0, 2, 1]), -2)
 
   // order = 4
 
@@ -39,12 +40,11 @@ test('Custom field with Boolean algebra', function (t) {
   t.plan(1)
 
   var boole = {
-    addition      : function (a, b) { return a && b },
+    addition: function (a, b) { return a && b },
     multiplication: function (a, b) { return a || b },
-    negation      : function (a) { return !a }
+    negation: function (a) { return !a }
   }
 
   t.equal(det([true, false,
                false, true], boole), true)
 })
-

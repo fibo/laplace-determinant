@@ -4,6 +4,7 @@
   "description": "recursive determinant computation using Laplace expansion",
   "main": "index.js",
   "scripts": {
+    "lint": "standa",
     "test": "node test.js | ./node_modules/tap-min/bin/tap-min"
   },
   "repository": {
@@ -11,22 +12,24 @@
     "url": "https://github.com/fibo/laplace-determinant.git"
   },
   "keywords": [
-    "algebra"
+    "algebra",
+    "determinant"
   ],
-  "author": "",
-  "license": [
-    {
-      "type": "MIT",
-      "url": "http://g14n.info/mit-license"
-    }
-  ],
+  "author": {
+    "name": "Gianluca Casati",
+    "url": "http://g14n.info"
+  },
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fibo/laplace-determinant/issues"
   },
-  "homepage": "https://github.com/fibo/laplace-determinant",
+  "homepage": "http://g14n.info/laplace-determinant",
   "devDependencies": {
+    "standa": "^1.1.0",
     "tap-min": "^1.0.0",
     "tape": "^4.2.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "not-defined": "^2.0.1"
+  }
 }

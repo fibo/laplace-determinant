@@ -1,3 +1,4 @@
+var no = require('not-defined')
 
 /**
  * Convert a pair of indices to a 1-dimensional index
@@ -31,10 +32,13 @@ function matrixToArrayIndex (i, j, numCols) {
 function subMatrix (data, numRows, numCols, row, col) {
   var sub = []
 
-  for (var i = 0; i < numRows; i++)
-    for (var j = 0; j < numCols; j++)
-      if ((i !== row) && (j !== col))
+  for (var i = 0; i < numRows; i++) {
+    for (var j = 0; j < numCols; j++) {
+      if ((i !== row) && (j !== col)) {
         sub.push(data[matrixToArrayIndex(i, j, numCols)])
+      }
+    }
+  }
 
   return sub
 }
@@ -59,21 +63,20 @@ function subMatrix (data, numRows, numCols, row, col) {
 function determinant (data, scalar, order) {
   // Recursion will stop here:
   // the determinant of a 1x1 matrix is its only element.
-  if (data.length === 1)
-    return data[0]
+  if (data.length === 1) return data[0]
 
-  if (typeof order === 'undefined')
-    order = Math.sqrt(data.length)
+  if (no(order)) order = Math.sqrt(data.length)
 
-  if (order % 1 !== 0)
-    throw new TypeError('data.lenght must be a square')
+    if (order % 1 !== 0) {
+      throw new TypeError('data.lenght must be a square')
+    }
 
   // Default to common real number field.
-  if (typeof scalar === 'undefined') {
+  if (no(scalar)) {
     scalar = {
-      addition      : function (a, b) { return a + b },
+      addition: function (a, b) { return a + b },
       multiplication: function (a, b) { return a * b },
-      negation      : function (a) { return -a }
+      negation: function (a) { return -a }
     }
   }
 
@@ -84,29 +87,29 @@ function determinant (data, scalar, order) {
   // needs scalar.isZero
   //
   // is scalar.isZero is a function will be used, but should remain optional
-  var startingCol = 0,
-      startingRow = 0
+  var startingRow = 0
 
   for (var col = 0; col < order; col++) {
     var subData = subMatrix(data, order, order, startingRow, col)
 
-                // +-- Recursion here.
-                // ↓
+    //             +-- Recursion here.
+    //             ↓
     var cofactor = determinant(subData, scalar, order - 1)
 
-    if ((startingRow + col) % 2 === 1)
+    if ((startingRow + col) % 2 === 1) {
       cofactor = scalar.negation(cofactor)
+    }
 
     var index = matrixToArrayIndex(startingRow, col, order)
 
-    if (typeof det === 'undefined')
+    if (no(det)) {
       det = scalar.multiplication(data[index], cofactor) // first iteration
-    else
+    } else {
       det = scalar.addition(det, scalar.multiplication(data[index], cofactor))
+    }
   }
 
   return det
 }
 
 module.exports = determinant
-
