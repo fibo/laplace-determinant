@@ -1,6 +1,6 @@
 {
   "name": "laplace-determinant",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "recursive determinant computation using Laplace expansion",
   "main": "index.js",
   "scripts": {
