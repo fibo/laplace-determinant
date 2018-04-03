@@ -10,6 +10,7 @@
   },
   "pre-commit": [
     "lint",
+    "test",
     "check-deps"
   ],
   "repository": {
@@ -30,10 +31,11 @@
   },
   "homepage": "http://g14n.info/laplace-determinant",
   "devDependencies": {
+    "dot-editorconfig": "^1.1.0",
     "pre-commit": "^1.2.2",
-    "standa": "^1.1.0",
+    "standa": "^2.0.1",
     "tap-min": "^1.0.0",
-    "tape": "^4.2.0"
+    "tape": "^4.9.0"
   },
   "dependencies": {
     "not-defined": "^2.0.1"
