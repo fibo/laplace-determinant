@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 
-var det = require('./index')
+var det = require('laplace-determinant')
 var test = require('tape')
 
 test('Basic usage', function (t) {

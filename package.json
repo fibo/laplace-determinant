@@ -2,11 +2,12 @@
   "name": "laplace-determinant",
   "version": "0.2.0",
   "description": "recursive determinant computation using Laplace expansion",
-  "main": "index.js",
+  "main": "laplace-determinant.js",
   "scripts": {
     "check-deps": "npm outdated",
     "lint": "standa",
-    "test": "node test.js | ./node_modules/tap-min/bin/tap-min"
+    "postversion": "git push origin v${npm_package_version}; npm publish; git push origin master",
+    "test": "NODE_PATH=. tape test.js"
   },
   "pre-commit": [
     "lint",
@@ -34,7 +35,6 @@
     "dot-editorconfig": "^1.1.0",
     "pre-commit": "^1.2.2",
     "standa": "^2.0.1",
-    "tap-min": "^1.0.0",
     "tape": "^4.9.0"
   },
   "dependencies": {
